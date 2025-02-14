@@ -1,0 +1,95 @@
+# 目录
+/data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# 数据文件
+*.csv
+*.xlsx
+*.xls
+*.h5
+*.pkl
+*.pickle
+
+# 模型文件
+*.pth
+*.pt
+*.h5
+*.hdf5
+*.keras
+*.joblib
+*.model
+
+# 环境文件
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# 日志文件
+*.log
+logs/
+tensorboard/
+
+# 临时文件
+tmp/
+temp/
+
+# 输出文件夹
+output/
+results/
+figures/
+plots/
+
+# 大文件
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 配置文件
+config.ini
+settings.json 
