@@ -530,7 +530,7 @@ def generate_window(
     
     return multi_window
 
-def create_conv_lstm_model(num_features: int, days_in_past: int) -> tf.keras.Model:
+def create_model(num_features: int, days_in_past: int, ) -> tf.keras.Model:
     """创建一个用于时间序列预测的 Conv-LSTM 模型
 
     参数:
@@ -563,40 +563,6 @@ def create_conv_lstm_model(num_features: int, days_in_past: int) -> tf.keras.Mod
             # 全连接层，将LSTM输出映射到预测目标维度
             tf.keras.layers.Dense(
                 OUT_STEPS * 1, kernel_initializer=tf.initializers.zeros()
-            ),
-            # 重塑输出为[OUT_STEPS, 1]的形状
-            tf.keras.layers.Reshape([OUT_STEPS, 1]),
-        ]
-    )
-
-    return model
-
-def create_informer_model(num_features: int, days_in_past: int) -> tf.keras.Model:
-    """创建一个用于时间序列预测的 Informer 模型
-
-    Args:
-        num_features (int): 输入特征数量
-        days_in_past (int): 使用过去多少天的数据来预测未来
-    """
-    OUT_STEPS = 24   # 输出步长（预测未来24小时）
-
-    model = tf.keras.Sequential(
-        [
-            # 掩码层，用于忽略值为-1.0的输入（异常数据）
-            tf.keras.layers.Masking(
-                mask_value=-1.0, input_shape=(days_in_past * 24, num_features)
-            ),
-            # 使用Informer模型
-            tf.keras.layers.Informer(
-                input_shape=(days_in_past * 24, num_features),
-                num_heads=4,
-                num_layers=2,
-                d_model=256,
-                d_ff=512,
-                dropout=0.1,
-                activation="relu",
-                output_attention=True,
-                output_attention_head=None, 
             ),
             # 重塑输出为[OUT_STEPS, 1]的形状
             tf.keras.layers.Reshape([OUT_STEPS, 1]),
@@ -648,8 +614,8 @@ def compile_and_fit(
     
     return history
 
-def train_dl_model(
-    data: pd.core.frame.DataFrame, features: List[str], days_in_past: int, create_model_func: Callable
+def train_conv_lstm_model(
+    data: pd.core.frame.DataFrame, features: List[str], days_in_past: int
 ) -> Tuple[WindowGenerator, tf.keras.Model, DataSplits]:
     """训练用于时间序列预测的Conv-LSTM模型
 
@@ -678,7 +644,7 @@ def train_dl_model(
     num_features = window.train_df.shape[1]
 
     # 构建Conv-LSTM模型
-    model = create_model_func(num_features, days_in_past)
+    model = create_model(num_features, days_in_past)
     # 编译并训练模型
     history = compile_and_fit(model, window)
     
