@@ -76,3 +76,11 @@
 ## 参考资料
 - [SDWPF数据集论文](https://arxiv.org/abs/2208.04360)
 - [时间特征编码方法](https://developer.nvidia.com/blog/three-approaches-to-encoding-time-information-as-features-for-ml-models/)
+
+## 贡献
+
+欢迎通过 Issue 和 Pull Request 的方式为项目做出贡献。请确保您的代码符合项目的编码风格，并提供相应的测试和文档。如有任何问题或建议，也可以通过邮箱 RookieEmail@163.com 与我联系。
+
+## 许可
+
+本项目采用 MIT 许可证。详情请查看项目中的 LICENSE 文件。
